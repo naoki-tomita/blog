@@ -3,11 +3,12 @@ import { Link } from "@hyperapp/router";
 
 import { State, Actions } from "../../App";
 import { Restricted } from "../Restricted";
-import {
-  BlockedInput,
-  BlockedTextArea,
-  BlockedButton,
-} from "../BlockedComponents";
+import { BlockedTextArea, BlockedButton } from "../BlockedComponents";
+import { styled } from "hyper-styled";
+
+const BlockedInput = styled.input`
+  display: block;
+`;
 
 export const Editor: Component<{}, State, Actions> = () => (
   { title, body },
@@ -18,7 +19,7 @@ export const Editor: Component<{}, State, Actions> = () => (
       <BlockedInput
         type="text"
         value={title}
-        onchange={e => setTitle((e.target as HTMLInputElement).value)}
+        onchange={(e: Event) => setTitle((e.target as HTMLInputElement).value)}
       />
       <BlockedTextArea
         value={body}

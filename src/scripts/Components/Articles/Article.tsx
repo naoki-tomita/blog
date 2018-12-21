@@ -20,7 +20,9 @@ export const ArticleItem: Component<Attributes> = ({
     <h1>
       <Link to={`/articles/${id}`}>{title}</Link>
     </h1>
-    <div>{body.replace(/\n/g, "<br>")}</div>
+    <div
+      oncreate={(el: Element) => (el.innerHTML = body.replace(/\n/g, "<br>"))}
+    />
     <div>{new Date(timestamp).toDateString()}</div>
   </div>
 );
