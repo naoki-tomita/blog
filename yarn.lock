@@ -2524,10 +2524,12 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-hyper-styled@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/hyper-styled/-/hyper-styled-0.0.2.tgz#3ea0f3bd1a6099d1257e4fb9eeac93efeeb9d486"
-  integrity sha512-6mQvZj8PG1tA/Vz/lwNFZgC/xg30kpDX9oZ8Kb6InwcJuZsMw5g9KKlZs2Xjll6b6yyBpZUBSGqis/PV84Bq3g==
+hyper-styled@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/hyper-styled/-/hyper-styled-0.0.6.tgz#eb92f015675a21c756ec967e76cb40a298dd8ab9"
+  integrity sha512-9CqmQpvQRim4d3sZ2kNyJ3SY93qnw9ibBKm6s3mSS5H8f8hfPVLxncru87ZBKrPXAiF80nlDUjMBTk29lNqrlQ==
+  dependencies:
+    hyperapp "^1.2.9"
 
 hyperapp@^1.2.9:
   version "1.2.9"

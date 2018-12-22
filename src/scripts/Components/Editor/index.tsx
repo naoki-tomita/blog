@@ -3,10 +3,17 @@ import { Link } from "@hyperapp/router";
 
 import { State, Actions } from "../../App";
 import { Restricted } from "../Restricted";
-import { BlockedTextArea, BlockedButton } from "../BlockedComponents";
 import { styled } from "hyper-styled";
 
 const BlockedInput = styled.input`
+  display: block;
+`;
+
+const BlockedButton = styled.button`
+  display: block;
+`;
+
+const BlockedTextArea = styled.textarea`
   display: block;
 `;
 
