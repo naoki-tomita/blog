@@ -3,18 +3,39 @@ import { Link } from "@hyperapp/router";
 
 import { State, Actions } from "../../App";
 import { Restricted } from "../Restricted";
-import { styled } from "hyper-styled";
+import {
+  BlockedInput,
+  BlockedTextArea,
+  BlockedButton,
+} from "../BlockedComponents";
+import { wrap } from "hyper-styled";
 
-const BlockedInput = styled.input`
-  display: block;
+const TitleInput = wrap(BlockedInput)`
+  outline: 0;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0 0 15px 0;
 `;
 
-const BlockedButton = styled.button`
-  display: block;
+const BodyInput = wrap(BlockedTextArea)`
+  outline: 0;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0 0 15px 0;
+  resize: vertical;
 `;
 
-const BlockedTextArea = styled.textarea`
-  display: block;
+const SendButton = wrap(BlockedButton)`
+  outline: 0;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 5px;
+
+  &:disabled {
+    background-color: gray;
+  }
 `;
 
 export const Editor: Component<{}, State, Actions> = () => (
@@ -23,23 +44,25 @@ export const Editor: Component<{}, State, Actions> = () => (
 ) => {
   return (
     <Restricted>
-      <BlockedInput
+      <TitleInput
         type="text"
+        placeholder="Title"
         value={title}
-        onchange={(e: Event) => setTitle((e.target as HTMLInputElement).value)}
+        oninput={(e: Event) => setTitle((e.target as HTMLInputElement).value)}
       />
-      <BlockedTextArea
+      <BodyInput
         value={body}
-        onchange={(e: Event) =>
-          setBody((e.target as HTMLTextAreaElement).value)
-        }
+        placeholder="Body"
+        oninput={(e: Event) => setBody((e.target as HTMLTextAreaElement).value)}
       />
-      <BlockedButton onclick={send}>send</BlockedButton>
+      <SendButton onclick={send} disabled={!title || !body}>
+        send
+      </SendButton>
     </Restricted>
   );
 };
 
-export const EditorLink: Component = () => (
+export const EditorLink: Component<{}, State, Actions> = () => (
   <Restricted>
     <Link to="/editor">contribute</Link>
   </Restricted>

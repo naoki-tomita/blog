@@ -5,11 +5,17 @@ import { Articles, ArticlesLink } from "./Components/Articles";
 import { Editor } from "./Components/Editor";
 import { location, Route } from "@hyperapp/router";
 import { EditorLink } from "./Components/Editor";
+import { Container } from "./Components/Common";
+import { wrap } from "hyper-styled";
+
+const WrappedAuth = wrap(Auth)`
+  color: blue;
+`;
 
 const view: View<State, Actions> = () => {
   return (
-    <div>
-      <Auth />
+    <Container>
+      <WrappedAuth />
       <Route
         path="/articles"
         parent
@@ -29,7 +35,7 @@ const view: View<State, Actions> = () => {
           </div>
         )}
       />
-    </div>
+    </Container>
   );
 };
 
@@ -43,7 +49,7 @@ const unsubscribe = firebaseApp
 firebaseApp
   .firestore()
   .collection("articles")
-  .orderBy("timestamp")
+  .orderBy("timestamp", "desc")
   .onSnapshot(snapshot =>
     main.onUpdateArticles(
       snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })),

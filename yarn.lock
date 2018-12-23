@@ -2160,6 +2160,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=
+
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2524,10 +2529,10 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-hyper-styled@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/hyper-styled/-/hyper-styled-0.0.6.tgz#eb92f015675a21c756ec967e76cb40a298dd8ab9"
-  integrity sha512-9CqmQpvQRim4d3sZ2kNyJ3SY93qnw9ibBKm6s3mSS5H8f8hfPVLxncru87ZBKrPXAiF80nlDUjMBTk29lNqrlQ==
+hyper-styled@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/hyper-styled/-/hyper-styled-0.0.8.tgz#c0f8c55195bb7f9d8885d9e9c44cddfd98fb7cfd"
+  integrity sha512-FEp/Gujk382kj46Pu2uoCg4Swsr4aElPYLwy/Zgqpsqkng0+JIPjxuSgeZSFa6zz6tAR8e8biZiAW5k7G8l3PQ==
   dependencies:
     hyperapp "^1.2.9"
 
