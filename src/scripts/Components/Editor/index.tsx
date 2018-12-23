@@ -22,6 +22,7 @@ const BodyInput = wrap(BlockedTextArea)`
   outline: 0;
   font-size: 20px;
   width: 100%;
+  height: 400px;
   border-radius: 5px;
   margin: 0 0 15px 0;
   resize: vertical;
@@ -64,6 +65,8 @@ export const Editor: Component<{}, State, Actions> = () => (
 
 export const EditorLink: Component<{}, State, Actions> = () => (
   <Restricted>
-    <Link to="/editor">contribute</Link>
+    <div>
+      <Link to="/edit">create</Link>
+    </div>
   </Restricted>
 );

@@ -2,6 +2,7 @@ import { h, Component } from "hyperapp";
 import { State, Actions } from "../../App";
 import { ArticleItem, Article as SingleArticle } from "./Article";
 import { Link, Route } from "@hyperapp/router";
+import { Editor } from "../Editor";
 
 export interface Article {
   id: string;
@@ -24,13 +25,19 @@ export const Articles: Component<{}, State, Actions> = () => ({ articles }) => {
         )}
       />
       <Route<{ id: string }>
-        path={`/articles/:id`}
+        path="/articles/:id"
         render={({ match }) => <SingleArticle id={match.params.id} />}
+      />
+      <Route<{ id: string }>
+        path="/articles/:id/edit"
+        render={() => <Editor />}
       />
     </div>
   );
 };
 
 export const ArticlesLink: Component = () => (
-  <Link to="/articles">articles</Link>
+  <div>
+    <Link to="/articles">articles</Link>
+  </div>
 );

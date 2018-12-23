@@ -16,25 +16,10 @@ const view: View<State, Actions> = () => {
   return (
     <Container>
       <WrappedAuth />
-      <Route
-        path="/articles"
-        parent
-        render={() => (
-          <div>
-            <EditorLink />
-            <Articles />
-          </div>
-        )}
-      />
-      <Route
-        path="/editor"
-        render={() => (
-          <div>
-            <ArticlesLink />
-            <Editor />
-          </div>
-        )}
-      />
+      <EditorLink />
+      <ArticlesLink />
+      <Route path="/articles" parent render={() => <Articles />} />
+      <Route path="/edit" render={() => <Editor />} />
     </Container>
   );
 };

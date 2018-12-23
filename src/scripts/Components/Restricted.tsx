@@ -3,4 +3,4 @@ import { State, Actions } from "../App";
 
 export const Restricted: Component<{}, State, Actions> = (_, children) => ({
   user,
-}) => <div>{user && children}</div>;
+}) => <span>{user && children}</span>;

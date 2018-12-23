@@ -22,6 +22,7 @@ export interface State {
   articles: Article[];
   title: string;
   body: string;
+  id: string | null;
   isShowEditor: boolean;
   location: LocationState;
 }
@@ -35,6 +36,7 @@ export const state: State = {
   isShowLogin: false,
   title: "",
   body: "",
+  id: null,
   isShowEditor: true,
   location: location.state,
 };
@@ -49,6 +51,7 @@ export interface Actions {
   switchSownLogin: ActionType<State, Actions>;
   setTitle: ActionType<State, Actions>;
   setBody: ActionType<State, Actions>;
+  setEditId: ActionType<State, Actions>;
   send: ActionType<State, Actions>;
   location: LocationActions;
 }
@@ -73,11 +76,24 @@ export const actions: Actions = {
   }),
   setTitle: (title: string) => ({ title }),
   setBody: (body: string) => ({ body }),
-  send: () => ({ title, body }) => (
-    firebaseApp
-      .firestore()
-      .collection("articles")
-      .add({ title, body, timestamp: Date.now() }),
+  setEditId: (id: string | null) => ({ articles }) => {
+    const { title, body } = articles.find(a => a.id === id)!;
+    return { id, title, body };
+  },
+  send: () => ({ title, body, id, articles }) => (
+    id
+      ? firebaseApp
+          .firestore()
+          .doc(`articles/${id}`)
+          .set({
+            title,
+            body,
+            timestamp: articles.find(a => a.id === id)!.timestamp,
+          })
+      : firebaseApp
+          .firestore()
+          .collection("articles")
+          .add({ title, body, timestamp: Date.now() }),
     { title: "", body: "" }
   ),
   location: location.actions,

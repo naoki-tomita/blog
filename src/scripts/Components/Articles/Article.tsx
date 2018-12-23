@@ -1,9 +1,9 @@
-import { h, Component } from "hyperapp";
-import { Link } from "@hyperapp/router";
+import { h, Component, VNode } from "hyperapp";
+import { Link, LinkProps } from "@hyperapp/router";
 import { styled } from "hyper-styled";
 
 import { State, Actions } from "../../App";
-import { ArticlesLink } from ".";
+import { Restricted } from "../Restricted";
 
 interface Attributes {
   id: string;
@@ -48,19 +48,28 @@ const RightJustified = styled.div`
   text-align: right;
 `;
 
-export const ArticleItem: Component<Attributes> = ({
+interface WrappedLinkProps extends LinkProps {
+  onclick?: () => void;
+}
+
+type WrappedLinkType = (props: WrappedLinkProps) => VNode<WrappedLinkProps>;
+const WrappedLink: WrappedLinkType = Link;
+
+export const ArticleItem: Component<Attributes, State, Actions> = ({
   id,
   timestamp,
   title,
   body,
-}) => (
+}) => (_, { setEditId }) => (
   <div>
     <InlineHead>
       <Link to={`/articles/${id}`}>{title}</Link>
     </InlineHead>
-    <Link to={`/articles/${id}/edit`}>
-      <InlineEdit />
-    </Link>
+    <Restricted>
+      <WrappedLink to={`/articles/${id}/edit`} onclick={() => setEditId(id)}>
+        <InlineEdit />
+      </WrappedLink>
+    </Restricted>
     <div
       oncreate={(el: Element) => (el.innerHTML = body.replace(/\n/g, "<br>"))}
     />
@@ -70,9 +79,4 @@ export const ArticleItem: Component<Attributes> = ({
 
 export const Article: Component<{ id: string }, State, Actions> = ({ id }) => ({
   articles,
-}) => (
-  <div>
-    <ArticlesLink />
-    <ArticleItem {...articles.find(a => a.id === id)!} />
-  </div>
-);
+}) => <ArticleItem {...articles.find(a => a.id === id)!} />;
