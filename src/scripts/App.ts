@@ -1,5 +1,8 @@
-import { initializeApp } from "firebase";
+import { initializeApp } from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 import { ActionType } from "hyperapp";
+
 import { Article } from "./Components/Articles";
 import { LocationState, LocationActions, location } from "@hyperapp/router";
 

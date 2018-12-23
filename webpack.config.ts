@@ -2,7 +2,7 @@ import { Configuration } from "webpack";
 import { join } from "path";
 
 const config: Configuration = {
-  mode: "development",
+  mode: "production",
   entry: [ "./src/scripts/index.tsx" ],
   output: {
     path: join(__dirname, "dist"),
