@@ -56,6 +56,8 @@ export interface Actions {
   setBody: ActionType<State, Actions>;
   setEditId: ActionType<State, Actions>;
   send: ActionType<State, Actions>;
+  createArticle: ActionType<State, Actions>;
+  updateArticle: ActionType<State, Actions>;
   location: LocationActions;
 }
 
@@ -83,21 +85,23 @@ export const actions: Actions = {
     const { title, body } = articles.find(a => a.id === id)!;
     return { id, title, body };
   },
-  send: () => ({ title, body, id, articles }) => (
+  send: () => ({ id }, { createArticle, updateArticle }) => (
     id
-      ? firebaseApp
-          .firestore()
-          .doc(`articles/${id}`)
-          .set({
-            title,
-            body,
-            timestamp: articles.find(a => a.id === id)!.timestamp,
-          })
-      : firebaseApp
-          .firestore()
-          .collection("articles")
-          .add({ title, body, timestamp: Date.now() }),
+      ? createArticle()
+      : updateArticle(),
     { title: "", body: "" }
   ),
+  createArticle: () => ({ title, body }) => (firebaseApp
+    .firestore()
+    .collection("articles")
+    .add({ title, body, timestamp: Date.now() })),
+  updateArticle: () => ({ title, body, articles, id }) => (firebaseApp
+    .firestore()
+    .doc(`articles/${id}`)
+    .set({
+      title,
+      body,
+      timestamp: articles.find(a => a.id === id)!.timestamp,
+    })),
   location: location.actions,
 };

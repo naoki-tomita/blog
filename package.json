@@ -28,7 +28,7 @@
     "prebuild": "run-p clean fix",
     "build": "run-p build:*",
     "build:apps": "cp -rf ./src/apps/. ./dist/.",
-    "build:scripts": "webpack --display-modules --config ./webpack.config.ts",
+    "build:scripts": "webpack --config ./webpack.config.ts",
     "serve": "ws --spa ./dist/index.html",
     "fix": "prettier --write --trailing-comma all \"./src/**/*.ts{x,}\""
   }
