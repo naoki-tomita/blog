@@ -6,20 +6,44 @@ import { Editor } from "./Components/Editor";
 import { location, Route } from "@hyperapp/router";
 import { EditorLink } from "./Components/Editor";
 import { Container } from "./Components/Common";
-import { wrap } from "hyper-styled";
+import { wrap, styled } from "hyper-styled";
 
 const WrappedAuth = wrap(Auth)`
   color: blue;
 `;
+const Menu = styled.div`
+  display: flex;
+`;
+const MenuItem = styled.div`
+  border-left: solid 1px #999;
+  margin: 8px 0;
+  padding: 0 8px;
 
-const view: View<State, Actions> = () => {
+  &:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+`;
+
+const view: View<State, Actions> = (_, { setTitle, setBody }) => {
   return (
     <Container>
-      <WrappedAuth />
-      <EditorLink />
-      <ArticlesLink />
+      <Menu>
+        <MenuItem>
+          <WrappedAuth />
+        </MenuItem>
+        <MenuItem>
+          <EditorLink />
+        </MenuItem>
+        <MenuItem>
+          <ArticlesLink />
+        </MenuItem>
+      </Menu>
       <Route path="/articles" parent render={() => <Articles />} />
-      <Route path="/edit" render={() => <Editor />} />
+      <Route
+        path="/edit"
+        render={() => <Editor oncreate={() => (setTitle(""), setBody(""))} />}
+      />
     </Container>
   );
 };
