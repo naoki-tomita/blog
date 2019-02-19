@@ -39,13 +39,13 @@ const SendButton = wrap(BlockedButton)`
   }
 `;
 
-export const Editor: Component<{}, State, Actions> = () => (
-  { title, body },
-  { setTitle, setBody, send },
-) => {
+export const Editor: Component<{ oncreate?: () => void }, State, Actions> = ({
+  oncreate,
+}) => ({ title, body }, { setTitle, setBody, send }) => {
   return (
     <Restricted>
       <TitleInput
+        oncreate={oncreate}
         type="text"
         placeholder="Title"
         value={title}

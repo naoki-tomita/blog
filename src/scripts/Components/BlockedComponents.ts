@@ -1,6 +1,6 @@
 import { styled } from "hyper-styled";
 
-export const BlockedInput = styled.input`
+export const BlockedInput = styled.input<{ oncreate?: () => void }>`
   display: block;
 `;
 

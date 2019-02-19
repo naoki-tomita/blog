@@ -14,7 +14,6 @@ export const firebaseApp = initializeApp({
   storageBucket: "",
   messagingSenderId: "618409773773",
 });
-firebaseApp.firestore().settings({ timestampsInSnapshots: true });
 
 export interface State {
   user: firebase.User | null;
@@ -86,22 +85,21 @@ export const actions: Actions = {
     return { id, title, body };
   },
   send: () => ({ id }, { createArticle, updateArticle }) => (
-    id
-      ? createArticle()
-      : updateArticle(),
-    { title: "", body: "" }
+    id ? updateArticle() : createArticle(), { title: "", body: "", id: "" }
   ),
-  createArticle: () => ({ title, body }) => (firebaseApp
-    .firestore()
-    .collection("articles")
-    .add({ title, body, timestamp: Date.now() })),
-  updateArticle: () => ({ title, body, articles, id }) => (firebaseApp
-    .firestore()
-    .doc(`articles/${id}`)
-    .set({
-      title,
-      body,
-      timestamp: articles.find(a => a.id === id)!.timestamp,
-    })),
+  createArticle: () => ({ title, body }) =>
+    firebaseApp
+      .firestore()
+      .collection("articles")
+      .add({ title, body, timestamp: Date.now() }),
+  updateArticle: () => ({ title, body, articles, id }) =>
+    firebaseApp
+      .firestore()
+      .doc(`articles/${id}`)
+      .set({
+        title,
+        body,
+        timestamp: articles.find(a => a.id === id)!.timestamp,
+      }),
   location: location.actions,
 };
